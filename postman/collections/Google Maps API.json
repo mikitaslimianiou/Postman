@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "432a3179-0e03-4b9a-b65a-235ca7d8d55b",
+		"name": "Google Maps API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "17690455-432a3179-0e03-4b9a-b65a-235ca7d8d55b"
+	},
+	"item": [
+		{
+			"name": "Create new location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b7c26d5-d3e9-4b41-8b85-3d4f98df1e6d",
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify that scope equals APP\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.scope).to.eql(\"APP\");\r",
+							"});\r",
+							"\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"varPlace_id\", jsonData.place_id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "38357f37-e27f-4d38-9b1e-dcd05228dafd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"location\": \r\n{ \r\n\"lat\": -38.383494, \r\n\"lng\": 33.427362 \r\n}, \r\n\"accuracy\": 50, \r\n\"name\": \"Frontline house\", \r\n\"phone_number\": \"(+91) 983 893 3937\", \r\n\"address\": \"29, side layout, cohen 09\", \r\n\"types\": \r\n[\r\n \"shoe park\", \r\n\"shop\"\r\n],\r\n\"website\": \"http://google.com\", \r\n\"language\": \"French-IN\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/maps/api/place/add/json?{{key}}=",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"add",
+						"json"
+					],
+					"query": [
+						{
+							"key": "{{key}}",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "c9f1eac5-8c0d-462f-b239-778c727607d8",
+					"name": "Create new location",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n\"location\": \r\n{ \r\n\"lat\": -38.383494, \r\n\"lng\": 33.427362 \r\n}, \r\n\"accuracy\": 50, \r\n\"name\": \"Frontline house\", \r\n\"phone_number\": \"(+91) 983 893 3937\", \r\n\"address\": \"29, side layout, cohen 09\", \r\n\"types\": \r\n[\r\n \"shoe park\", \r\n\"shop\"\r\n],\r\n\"website\": \"http://google.com\", \r\n\"language\": \"French-IN\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/maps/api/place/add/json?{{key}}=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"maps",
+								"api",
+								"place",
+								"add",
+								"json"
+							],
+							"query": [
+								{
+									"key": "{{key}}",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 19 Jan 2023 12:48:29 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.41 (Ubuntu)"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+						},
+						{
+							"key": "Content-Length",
+							"value": "194"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"OK\",\n    \"place_id\": \"2269a99dade66f2633614aa092fc5ef4\",\n    \"scope\": \"APP\",\n    \"reference\": \"1964df881f95aa9ae21b26f9ad97209f1964df881f95aa9ae21b26f9ad97209f\",\n    \"id\": \"1964df881f95aa9ae21b26f9ad97209f\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Status new location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be2ef819-2cd8-4791-b047-433f9e4e28b8",
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "bff437b9-d11b-46bc-b7e4-e6c4880c981c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id={{varPlace_id}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						},
+						{
+							"key": "place_id",
+							"value": "{{varPlace_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13a1089a-c82c-4894-b317-405f34d9f3fe",
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "a7db834a-9858-47f6-8d33-7b40d061ab37",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"place_id\":\"{{varPlace_id}}\",\r\n\"address\":\"41 Chkalov street, BY\", \r\n\"key\":\"qaclick123\" \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/update/json?key=qaclick123",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"update",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status new update location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "105e7ff3-0108-44f8-98e9-d0b1e2a27845",
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c01d1726-9907-40a8-aedc-dedc7df9d2b8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id={{varPlace_id}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						},
+						{
+							"key": "place_id",
+							"value": "{{varPlace_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3387e5b5-2016-4ed2-9bd7-fac6c6e4f39d",
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "222b8150-3358-4abd-9915-9b0433655936",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"place_id\":\"{{varPlace_id}}\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/delete/json?key=qaclick123",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"delete",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status new delete location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "630eeb3c-4918-4127-8fcc-3e23b3ced9d3",
+						"exec": [
+							"pm.test(\"Verify status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "86a21958-98d1-41ed-836c-79f0f6d534a7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&place_id={{varPlace_id}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"get",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						},
+						{
+							"key": "place_id",
+							"value": "{{varPlace_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "907c60b4-900b-4099-a8a7-aa07a771131a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b440ffcc-525f-42d5-82d0-87a374343d56",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6cc42757-d7ec-4182-8da1-6cd84fef6eef",
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "edeec12b-c529-4fe8-8a99-2ddca7c1a5a2",
+			"key": "key",
+			"value": "your key",
+			"type": "string"
+		},
+		{
+			"id": "c2894762-f858-4eea-b8a6-06f931c5fac1",
+			"key": "varPlace_id",
+			"value": "your place id",
+			"type": "string"
+		}
+	]
+}
